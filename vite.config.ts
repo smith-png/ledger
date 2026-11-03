@@ -4,9 +4,12 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import {VitePWA} from 'vite-plugin-pwa';
 
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const BASE = repo ? `/${repo}/` : '/';
+
 export default defineConfig(() => {
   return {
-    base:'/ArthaLedger1/',
+    base: BASE,
     plugins: [
       react(),
       tailwindcss(),
@@ -14,7 +17,7 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
-          id: '/ArthaLedger1/',
+          id: BASE,
           name: 'ArthaLedger',
           short_name: 'ArthaLedger',
           description:
@@ -24,8 +27,8 @@ export default defineConfig(() => {
           display: 'standalone',
           orientation: 'any',
           categories: ['finance', 'productivity'],
-          start_url: '/ArthaLedger1/',
-          scope: '/ArthaLedger1/',
+          start_url: BASE,
+          scope: BASE,
           icons: [
             {
               src: 'pwa-192x192.png',
